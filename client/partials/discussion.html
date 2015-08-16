@@ -1,0 +1,64 @@
+<div class = "container" ng-controller = "discussionsController">
+
+  <div class="form-group">
+    <div class="dropdown">
+        <input type="submit" value="Log Out" ng-click='' class="button btn-info">
+    </div>  
+  </div>
+
+    <p ng-bind="person"></p>
+    <h2 ng-bind="location.name">{{location[0].name}}</h2>
+    <div class="form-group"> 
+    
+    <label class="control-label col-sm-2" for="Add">Discussion:</label>
+    <div class="col-sm-10">
+          <input name = "discussion" ng-model='new_discussion.discussion ' type="text"  class="form-control" id="add"> 
+    </div>         
+  </div>
+
+  <div class="Discussion">
+      <input type="submit" value="Submit" ng-click='addDiscussion()' class="button btn-info">
+  </div>
+
+
+  <div ng-repeat = "discussion in discussions" ng-if = "discussion.shop_id == location[0]._id">
+    <!-- discussions start looping here -->
+    <p >Discussion: {{discussion.user}}: {{discussion.discussion}}</p> 
+
+    <p>{{discussion.upvote}}</p>
+      <button ng-click = "addUpvote(discussion._id)">Upvote</button> 
+      <p>{{discussion.downvote}}</p>
+      <button ng-click = "addDownvote(discussion._id)">Downvote</button>
+     <!-- Comments start looping here -->
+       <div ng-repeat = "comment in comments" ng-if = "comment.discussion_id == discussion._id">
+    <p >Comment: {{comment.user}}: {{comment.comment}}</p> 
+
+    <p>{{comment.upvote}}</p>
+      <button ng-click = "addUpvotes(comment._id)">Upvote</button> 
+      <p>{{comment.downvote}}</p>
+      <button ng-click = "addDownvotes(comment._id)">Downvote</button>
+    </div>
+
+    <label class="control-label col-sm-2" for="Add">Comment:</label>
+    <div class="col-sm-10">
+          <input name = "comment" ng-model='new_comment.comment ' type="text"  class="form-control" id="add"> 
+    </div> 
+
+    <div class="addComments">
+      <input type="submit" value="Submit" ng-click='addComment(new_comment,discussion._id)' class="button btn-info">
+  </div>
+
+
+
+  </div>
+
+
+
+  
+  
+
+      
+</div>
+
+
+

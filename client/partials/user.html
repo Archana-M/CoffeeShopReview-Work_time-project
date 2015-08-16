@@ -1,0 +1,127 @@
+<!-- 
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="validate.js"></script>
+
+
+
+<body>
+
+<div ng-controller='usersController'>
+   
+   <div class="container">
+       <div id = "errors">
+       </div>
+       <form name = "myform">
+           <div class="form-group">
+            
+
+               <label class="control-label col-sm-2" for='first_name'>First Name:</label>
+               <input type="text" ng-model='newUser.first_name' class="form-control" name='first_name' id='first_name'  ng-minlength = "3">
+
+               <span style="color:red" ng-show="myform.first_name.$dirty && myform.first_name.$invalid">
+            
+                <span ng-show="myform.first_name.$error.minlength">Username is required.</span>
+              </span>
+           </div>
+             <div class="form-group">
+               <label class="control-label col-sm-2" for='last_name'>Last Name:</label>
+               <input type="text" ng-model='newUser.last_name' class="form-control" name='last_name' id='last_name'>
+           </div>
+            <div class="form-group">
+               <label class="control-label col-sm-2" for='user_name'>User Name:</label>
+               <input type="text" ng-model='newUser.user_name' class="form-control" name='user_name' id='user_name'>
+           </div>
+           <div class="form-group">
+               <label class="control-label col-sm-2" for='email'>Email:</label>
+               <input type="text" ng-model='newUser.email' class="form-control" name='email' id='email' required>
+              
+            <span style="color:red" ng-show="myform.email.$error.required">Required!</span>
+             <span style="color:red" ng-show="myform.email.$error.email">Not a valid email</span>
+
+           </div>
+           <div class="form-group">
+               <label class="control-label col-sm-2" for='password'>Password:</label>
+               <input type="password" ng-model='newUser.password' class="form-control" name='password' id='password'>
+
+              <span style="color:red" ng-show="myform.password.$error.required">Required!</span>
+             <span style="color:red" ng-show="password_error">Password must match</span>
+
+           </div>
+           <div class="form-group">
+               <label class="control-label col-sm-2" for='confirm_password'>Confirm Password:</label>
+               <input type="password" ng-model='newUser.confirm_password' class="form-control" name='confirm_password' id='confirm_password'>
+           </div>
+
+          
+           <div class="form-group">
+               <div class="dropdown">
+                <a href="#/partial3" ng-click='addUser()' value="Register" class="button btn-info">Register</a>
+               </div>  
+           </div>
+       </form> 
+       <form>
+            <div class="form-group">
+               <div class="dropdown">
+                   <input type="submit" value="Log Out" class="button btn-info">
+               </div>  
+           </div>
+
+       </form>
+   </div> <!-- End of container div-->
+</div>
+
+     <script type="text/javascript">     
+       var validator = new FormValidator('register_form', [{
+               name: 'first_name',
+               display: 'required',
+               rules: 'required'
+           }, {
+               name: 'last_name',
+               display: 'required',
+               rules: 'required'
+           }, {
+               name: 'user_name',
+               display: 'required',
+               rules: 'required'
+           }, {
+               name: 'password',
+               rules: 'required'
+           }, {
+               name: 'confirm_password',
+               display: 'password confirmation',
+               rules: 'required|matches[password]'
+           }, {
+               name: 'email',
+               rules: 'valid_email',
+               depends: function() {
+                   return Math.random() > .5;
+               }
+           }, {
+               name: 'minlength',
+               display: 'min length',
+               rules: 'min_length[8]'
+           }], function(errors, event) {
+                   if (errors.length > 0) {
+                   var errorString = '';
+
+                   // console.log(errors);
+                   // event.preventDefault();
+                   // console.dir(document);
+                   // // //used for looking at the document
+                   
+
+                   for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
+                   errorString += errors[i].message + '<br />';
+                   }
+                    document.getElementById("errors").innerHTML = errorString;
+                   }
+                   console.log(errorString);
+                   console.dir(document);
+})
+
+   </script>
+ </body>

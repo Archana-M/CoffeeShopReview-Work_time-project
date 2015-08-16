@@ -1,0 +1,157 @@
+<div class = "container" ng-controller = "locationsController">
+
+
+  <div class="form-group">
+      <div class="dropdown">
+          <input type="submit" value="Log Out" ng-click='' class="button btn-info">
+      </div>  
+  </div>
+
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+        
+        <label class="control-label col-sm-2" for="Add">Search</label>
+            <div class="col-sm-4">          
+        
+        <input type="text" ng-model="filter_location" class="form-control" id="pwd" placeholder="Search">
+
+      </form>
+
+  <div class="form-group">
+
+    
+
+      <table class="table table-striped table-bordered table-hover">
+       <thead>
+           <tr>
+             <th>Name</th>
+             <th>Description</th>
+             <th>Category</th>
+             <th>Rating</th>
+             <th>WiFi</th>
+             <th>Noise Level</th>
+             <th>Location</th>
+             <th>Date</th>
+             <th>Time</th>
+             <th>Remove</th>
+           </tr>
+       </thead>
+
+       <tbody>
+           <tr ng-repeat="location in locations | filter: filter_location">
+
+
+             <td><a href="#/discussion/{{location._id}}" ng-bind = "location.name"></a></td>
+            <!-- _id '_' says that its the unique id created by the object -->
+             <td><span ng-bind = "location.description"></td>
+             <td><span ng-bind = "location.category"></td>
+             <td><span ng-bind = "location.rating"></td>
+             <td><span ng-bind = "location.wifi"></td>
+             
+             <td><span ng-bind = "location.noiselevel"></td>
+             <td><span ng-bind = "location.location"></td>
+             <td><span ng-bind = "location.date| date: MMMM:dd:yyyy"></td>
+             <td><span ng-bind = "location.time"></td>
+             <td><button ng-click="removeLocation(location)" type="button" class="btn btn-primary btn-md btn-danger">Remove</button>  </td>
+           </tr>
+       </tbody>
+
+     </table>
+  </div>  <!-- end of table form -->
+
+  <form class="form-horizontal" role="form">
+
+   <div class="form-group"> 
+      <h2>Add A Location:</h2>
+      <label class="control-label col-sm-2" for="Add">Name Of Location:</label>
+      <div class="col-sm-10">
+            <input name = "name" ng-model='new_location.name' type="text"  class="form-control" id="add"> 
+      </div>         
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for='description'>Description:</label>
+        <div class="col-sm-10">
+         <input type="text" ng-model='new_location.description' class="form-control" name='description' id='description'>
+        </div> 
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for='last_name'>Category:</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="sel1" ng-model='new_location.category'>
+              <option>Coffee</option>
+              <option>Tea</option>
+          </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for='last_name'>Ratings:</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="sel1" ng-model='new_location.rating'>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for='last_name'>WiFi:</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="sel1" ng-model='new_location.wifi'>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for='last_name'>Noise level:</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="sel1" ng-model='new_location.noiselevel'>
+          <option>High</option>
+          <option>Moderate</option>
+          <option>Low</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+       <div class="col-sm-10">
+          <label class="control-label col-sm-2" for='location'>Date:</label>
+          <input ng-model='new_location.date' type="date" name="date">
+      </div>
+    </div>
+
+      <select class="form-control" id="sel1" ng-model='new_location.time'>
+          <option>10:00 AM</option>
+          <option>11:00 AM</option>
+          <option>12:00 AM</option>
+          <option>1:00 PM</option>
+          <option>2:00 PM</option>
+      </select>
+
+
+    <div class="form-group">
+       <div class="col-sm-10">
+        <label class="control-label col-sm-2" for='location'>Location:</label> <br>
+        <input ng-model='new_location.location' type="radio" name="sj" value="San Jose">San Jose<br>
+        <input ng-model='new_location.location' type="radio" name="sf" value="San Francisco">San Francisco<br>
+        <input ng-model='new_location.location' type="radio" name="sf" value="San Ramon">San Ramon<br>
+        <input ng-model='new_location.location' type="radio" name="sf" value="Milpitas">Milpitas<br>
+      </div>
+    </div>
+
+    <div class="addLocations">
+        <input type="submit" value="Submit" ng-click='addLocation(new_location)' class="button btn-info">
+    </div>
+
+  </form>
+</div>
